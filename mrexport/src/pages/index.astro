@@ -1,0 +1,308 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import WhatsAppCTA from '../components/WhatsAppCTA.astro';
+import { categories } from '../data/categories';
+import { allProducts } from '../data/products-index';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Mr Exporter — Iran Export Hub',
+  description: 'Your trusted Iran export partner connecting international buyers with quality Iranian products across petrochemicals, metals, industrial goods, food and handicrafts.',
+  url: 'https://mrexporter.ir',
+};
+---
+
+<Layout
+  title="Mr Exporter — Iran Export Hub | Petrochemicals, Metals, Food, Handicrafts"
+  description="Source quality Iranian export products: petrochemicals, metals & minerals, industrial goods, shelf-stable foods and Persian handicrafts. 33 products with verified HS codes. WhatsApp inquiry."
+  canonicalPath="/"
+  structuredData={structuredData}
+>
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Mr<span class="accent">Exporter</span></h1>
+      <p class="hero-subtitle">Iran Export Hub</p>
+      <p class="hero-desc">
+        Your trusted partner for sourcing quality Iranian export products. We connect international buyers
+        with verified suppliers across five major categories — from petrochemicals and metals to food and
+        Persian handicrafts. Browse {allProducts.length} products with detailed specifications and HS codes.
+      </p>
+      <div class="hero-actions">
+        <a href="/products" class="btn-primary">Browse All Products</a>
+        <WhatsAppCTA />
+      </div>
+    </div>
+  </section>
+
+  <section class="categories-section">
+    <div class="section-inner">
+      <h2 class="section-heading">Export Categories</h2>
+      <div class="categories-grid">
+        {categories.map((cat) => {
+          const count = allProducts.filter((p) => p.categorySlug === cat.slug).length;
+          return (
+            <a href={`/categories/${cat.slug}`} class="category-card">
+              <div class="cat-icon" data-icon={cat.imageIcon}>
+                <span>{cat.name.charAt(0)}</span>
+              </div>
+              <h3>{cat.name}</h3>
+              <p>{cat.shortDescription}</p>
+              <span class="cat-count">{count} products</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-section">
+    <div class="section-inner">
+      <h2 class="section-heading">Featured Products</h2>
+      <div class="product-grid">
+        {allProducts.slice(0, 8).map((product) => (
+          <ProductCard product={product} />
+        ))}
+      </div>
+      <div class="view-all-wrap">
+        <a href="/products" class="btn-secondary">View All {allProducts.length} Products →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-section">
+    <div class="section-inner">
+      <h2 class="section-heading">Why Source from Iran?</h2>
+      <div class="features-grid">
+        <div class="feature">
+          <h3>Rich Natural Resources</h3>
+          <p>Iran is a major producer of petrochemicals, metals, minerals and agricultural products with abundant natural resources and established production infrastructure.</p>
+        </div>
+        <div class="feature">
+          <h3>Competitive Pricing</h3>
+          <p>Direct sourcing from Iranian producers offers competitive pricing for international buyers, with flexible order quantities from container loads to bulk shipments.</p>
+        </div>
+        <div class="feature">
+          <h3>Quality Standards</h3>
+          <p>Iranian export products meet international quality standards with proper documentation, certifications and compliance with destination market requirements.</p>
+        </div>
+        <div class="feature">
+          <h3>Cultural Heritage</h3>
+          <p>Persian handicrafts represent centuries of artistic tradition — carpets, copper, khatam, minakari and pottery crafted by skilled artisans using traditional techniques.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2>Ready to Source from Iran?</h2>
+      <p>Send us a WhatsApp inquiry and we'll connect you with the right suppliers for your needs.</p>
+      <WhatsAppCTA />
+    </div>
+  </section>
+</Layout>
+
+<style>
+.hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0c4a6e 100%);
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+.hero-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #f8fafc;
+  margin: 0;
+  letter-spacing: -0.03em;
+}
+.accent { color: #0ea5e9; }
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 0.25rem 0 1.5rem;
+}
+.hero-desc {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.hero-actions {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-block;
+  background: #0ea5e9;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+.btn-primary:hover {
+  background: #0284c7;
+  transform: translateY(-2px);
+}
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+.section-heading {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.categories-section {
+  padding: 4rem 0;
+}
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+.category-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-decoration: none;
+  transition: all 0.25s;
+  display: flex;
+  flex-direction: column;
+}
+.category-card:hover {
+  border-color: #0ea5e9;
+  box-shadow: 0 8px 24px rgba(14, 165, 233, 0.12);
+  transform: translateY(-4px);
+}
+.cat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #0ea5e9, #0284c7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.cat-icon span {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  text-transform: uppercase;
+}
+.category-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.category-card p {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.5;
+  flex: 1;
+  margin-bottom: 0.75rem;
+}
+.cat-count {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #0ea5e9;
+}
+.featured-section {
+  padding: 4rem 0;
+  background: #f8fafc;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.25rem;
+}
+.view-all-wrap {
+  text-align: center;
+  margin-top: 2rem;
+}
+.btn-secondary {
+  display: inline-block;
+  background: #fff;
+  color: #0ea5e9;
+  border: 2px solid #0ea5e9;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+.btn-secondary:hover {
+  background: #0ea5e9;
+  color: #fff;
+}
+.about-section {
+  padding: 4rem 0;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+.feature {
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+}
+.feature h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #0f172a;
+}
+.feature p {
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.6;
+  margin: 0;
+}
+.cta-section {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+.cta-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.cta-section h2 {
+  color: #f8fafc;
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+.cta-section p {
+  color: #cbd5e1;
+  margin-bottom: 1.5rem;
+}
+.cta-section :global(.whatsapp-cta) {
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.25rem; }
+  .hero-actions { flex-direction: column; align-items: center; }
+  .section-heading { font-size: 1.5rem; }
+}
+</style>

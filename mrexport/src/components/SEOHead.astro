@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  keywords?: string[];
+  structuredData?: object;
+}
+
+const { title, description, canonicalPath = '', keywords = [], structuredData } = Astro.props;
+
+const siteUrl = 'https://mrexporter.ir';
+const canonical = `${siteUrl}${canonicalPath}`;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords.join(', ')} />
+<link rel="canonical" href={canonical} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:site_name" content="Mr Exporter" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{structuredData && (
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+)}

@@ -1,0 +1,38 @@
+# Mr Exporter — Iran Export Hub
+
+> Mr Exporter connects international buyers with verified Iranian suppliers across six export categories: Petrochemicals & Plastics, Metals & Minerals, Industrial Products & Equipment, Construction Materials, Shelf-Stable Food Products, and Persian Handicrafts.
+
+## Business
+
+- Name: Mr Exporter
+- Website: https://mrexporter.ir
+- WhatsApp: +98 914 340 3431 (https://wa.me/989143403431)
+- Role: B2B export intermediary connecting international buyers with Iranian product suppliers
+- Products: 37 export products with verified HS codes across 6 categories
+- No fabricated prices, suppliers or certifications on any page
+
+## Product Categories
+
+- Petrochemicals & Plastics: Polypropylene, PVC resin, methanol, caustic soda, PET resin
+- Metals & Minerals: Zinc ingots, lead ingots, travertine, marble, gypsum, barite, bentonite, calcium carbonate, silica
+- Industrial Products & Equipment: Pumps, valves, steel pipes, electrical cables, plastic packaging
+- Construction Materials: Portland cement, steel rebar, ceramic tiles, construction glass
+- Shelf-Stable Food Products: Dates, dried figs, tomato paste, honey, dried barberries
+- Persian Handicrafts: Carpets, kilim, copper crafts, khatam kari, minakari, pottery, wooden crafts, leather goods, traditional textiles
+
+## Site Structure
+
+- Homepage: https://mrexporter.ir/
+- All products index: https://mrexporter.ir/products
+- Category pages: https://mrexporter.ir/categories/{slug}
+- Product pages: https://mrexporter.ir/products/{slug}
+- Sitemap: https://mrexporter.ir/sitemap.xml
+- Robots: https://mrexporter.ir/robots.txt
+
+## Content Policy
+
+- Each product page contains 1,800+ words of unique, buyer-focused content
+- HS codes are marked as verified, conditional, or unverified with explanatory notes
+- WhatsApp CTAs use pre-filled inquiry messages to +98 914 340 3431
+- All pages are statically generated (Astro static site generation)
+- No database, no backend, no user-generated content

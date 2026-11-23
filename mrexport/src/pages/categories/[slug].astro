@@ -1,0 +1,127 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import WhatsAppCTA from '../../components/WhatsAppCTA.astro';
+import { categories } from '../../data/categories';
+import { getProductsByCategory } from '../../data/products-index';
+import type { Category } from '../../data/types';
+
+export function getStaticPaths() {
+  return categories.map((cat) => ({
+    params: { slug: cat.slug },
+  }));
+}
+
+interface Props {
+  category: Category;
+}
+const { slug } = Astro.params;
+const category = categories.find((c) => c.slug === slug) as Category;
+const products = getProductsByCategory(slug!);
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: category.name,
+  description: category.metaDescription,
+  url: `https://mrexporter.ir/categories/${category.slug}`,
+};
+---
+
+<Layout
+  title={category.metaTitle}
+  description={category.metaDescription}
+  canonicalPath={`/categories/${category.slug}`}
+  structuredData={structuredData}
+>
+  <Breadcrumbs
+    crumbs={[
+      { label: 'Home', href: '/' },
+      { label: category.name },
+    ]}
+  />
+
+  <div class="category-page">
+    <div class="category-hero">
+      <h1>{category.name}</h1>
+      <p class="category-desc">{category.shortDescription}</p>
+      <div class="category-cta">
+        <WhatsAppCTA />
+      </div>
+    </div>
+
+    <div class="product-grid">
+      {products.map((product) => (
+        <ProductCard product={product} />
+      ))}
+    </div>
+
+    <div class="category-info">
+      <h2>About {category.name} Export from Iran</h2>
+      <p>
+        Iran is a significant exporter of {category.name.toLowerCase()}, with products meeting international
+        quality standards. Mr Exporter connects international buyers with verified Iranian suppliers
+        across this category. All products listed above are available for export with proper documentation,
+        competitive pricing and flexible order quantities.
+      </p>
+      <p>
+        For inquiries about any product in this category, click the WhatsApp button to send us a
+        pre-filled inquiry. We respond with product specifications, pricing, minimum order quantities
+        and export terms. You manually send the message to begin the conversation.
+      </p>
+    </div>
+  </div>
+</Layout>
+
+<style>
+.category-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+}
+.category-hero {
+  text-align: center;
+  padding: 2rem 0;
+  border-bottom: 2px solid #e2e8f0;
+  margin-bottom: 2rem;
+}
+.category-hero h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+.category-desc {
+  font-size: 1.1rem;
+  color: #475569;
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+.category-cta {
+  display: flex;
+  justify-content: center;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.category-info {
+  padding: 2rem;
+  background: #f8fafc;
+  border-radius: 0.75rem;
+}
+.category-info h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+.category-info p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #334155;
+  margin-bottom: 0.75rem;
+}
+</style>
